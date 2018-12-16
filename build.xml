@@ -23,12 +23,9 @@
     </target>
 
     <target name="-post-jfx-deploy">
-        <exec executable="rm">
-            <arg line="${dist.dir}/VisibleTesla.jnlp ${dist.dir}/VisibleTesla.html"/>
-        </exec>
-        <exec executable="rm">
-            <arg line="-rf ${dist.dir}/web-files"/>
-        </exec>
+        <delete file="${dist.dir}/VisibleTesla.jnlp" />
+        <delete file="${dist.dir}/VisibleTesla.html" />
+        <delete dir="${dist.dir}/web-files" />
     </target>
 
     <import file="nbproject/build-impl.xml"/>

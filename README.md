@@ -1,4 +1,4 @@
-#VisibleTesla
+# VisibleTesla
 
 **NOTE** to existing users: Starting with version 0.31.00, VisibleTesla will do a one time transofrmation of data files to a new and enhanced format. This conversion is irreversible and the new format is not compatible with older versions. The older version of the data files will not be changed or deleted, but it is strongly suggested that they be backed up before moving to VisibleTesla version 0.31.00 or greater. Once you are successfully converted to the new data file format, you may remove the old files if you wish in order to save space.
 
@@ -12,16 +12,17 @@ This software and documentation do not come from Tesla Motors Inc.
 
 **NOTE:** This version depends on the "owner" interface to Tesla's servers and as a consequence requires the "Post6" version of TeslaClient.
 
-#Disclaimer
+# Disclaimer
 
 Use this application at your own risk. The author does not guarantee its proper functioning. This application attempts to use the same interfaces used by the official Tesla apps. However, it is possible that use of this application may cause unexpected damage for which nobody but you are responsible. Use of this application can change the settings on your car and may have negative consequences such as (but not limited to) unlocking the doors, opening the sun roof, or reducing the available charge in the battery.
 
-#Contributors
+# Contributors
 Joe Pasqua (https://github.com/jpasqua): Author  
 Alex Karahalios (https://github.com/araxara): Mac App Bundling  
 Sune Jakobsson (https://github.com/sunejak): Testing and Several Bug Fixes
+James Burke (https://github.com/jbct): Modern updates
 
-#Preparing your build environment
+# Preparing your build environment
 
 This project assumes a directory structure that looks like this:
 
@@ -30,15 +31,16 @@ This project assumes a directory structure that looks like this:
 		VisibleTesla		-- This project
 	ThirdParty				-- A repository for third party library dependencies
 		apache
-			commons-io-2.4
+			commons-io-2.6
 		javafx-dialogs
 		jfxtras
 		jexcelapi
 		google-guava
+        Medusa-8.0.jar
 		appbundler-1.0.jar	-- Optional if you want to create Mac OS X bundled application
 
 The Tesla/VisibleTesla directory corresponds to this github project (VisibleTesla.git). The TeslaClient directory corresponds to a companion project which is the Tesla REST API implementation. That project can be found here:
-[TeslaClient](https://github.com/jpasqua/TeslaClient.git)
+[TeslaClient](https://github.com/jbct/TeslaClient.git)
 
 Once you have installed the TeslaClient project you'll have most of what you need. To get the rest, you can use the following commands to populate the hierarchy. It assumes that:
 
@@ -49,17 +51,18 @@ Be sure to either set these variables or adapt the commands below. Note that the
 	cd $ROOT
     mkdir Tesla
     cd Tesla
-    git clone https://github.com/jpasqua/VisibleTesla.git
+    git clone https://github.com/jbct/VisibleTesla.git
 	mkdir $ROOT/ThirdParty/javafx-dialogs
 	mkdir $ROOT/ThirdParty/jfxtras
 	mkdir $ROOT/ThirdParty/jexcelapi
 	mkdir $ROOT/ThirdParty/google-guava
+    mkdir $ROOT/ThirdParty/apache
 
 	# Download the apache libraries
 	cd $ROOT/ThirdParty/apache
-	curl -s -O http://mirror.nexcess.net/apache//commons/io/binaries/commons-io-2.4-bin.zip
-	unzip commons-io-2.4-bin.zip
-	rm commons-io-2.4-bin.zip
+	curl -s -O http://www.gtlib.gatech.edu/pub/apache//commons/io/binaries/commons-io-2.6-bin.zip
+	unzip commons-io-2.6-bin.zip
+	rm commons-io-2.6-bin.zip
 
 	# Download the javafx-dialogs library
 	cd $ROOT/ThirdParty/javafx-dialogs
@@ -74,23 +77,27 @@ Be sure to either set these variables or adapt the commands below. Note that the
 
 	# Download Google Guava
 	cd $ROOT/ThirdParty/google-guava
-    curl -s -O -L http://search.maven.org/remotecontent?filepath=com/google/guava/guava/18.0/guava-18.0.jar
+    curl -s -O -L http://central.maven.org/maven2/com/google/guava/guava/27.0.1-jre/guava-27.0.1-jre.jar
 
 	# Download the jfxtras library
-	# There may be a newer version of the library. If so, update the version details below
 	cd $ROOT/ThirdParty/jfxtras
-	curl -s -O https://dl.dropboxusercontent.com/u/7045813/VisibleTesla/jars/jfxtras-labs-2.2.jar
+    curl -s -O http://central.maven.org/maven2/org/jfxtras/jfxtras-controls/8.0-r6/jfxtras-controls-8.0-r6.jar
+    curl -s -O http://central.maven.org/maven2/org/jfxtras/jfxtras-common/8.0-r6/jfxtras-common-8.0-r6.jar
+    curl -s -O http://central.maven.org/maven2/org/jfxtras/jfxtras-labs/8.0-r6/jfxtras-labs-8.0-r6.jar
 
+    # Download the Medusa library
+    cd $ROOT/ThirdParty
+    curl -s -O http://central.maven.org/maven2/eu/hansolo/Medusa/8.0/Medusa-8.0.jar
+    
 	# The Java application bundler file is only used to create a Mac OS X bundled app. It's not used by VisibleTesla at run time
-	cd $ROOT/ThirdParty
 	curl -s -O -L https://java.net/projects/appbundler/downloads/download/appbundler-1.0.jar
 
 
-#Installing and Running VisibleTesla
+# Installing and Running VisibleTesla
 
 Once you've built the application, you can run it simply by double-clicking <code>VisibleTesla.jar</code>in Tesla/VisibleTesla/dist. For details, refer to the documentation and release notes in Tesla/VisibleTesla/Documentation.
 
-#Building a Mac OS X Bundled Application
+# Building a Mac OS X Bundled Application
 
 You can build a version of VisibleTesla that has the Java runtime bundled and is a self-contained Mac OS X application. To build VisibleTesla.app, you need to set an environment variable that identifies the JVM you want to be bundled in. To do that, just point JAVA_HOME to the desired location. Once you've done that, you can build the bundle-VisibleTesla target. The following commands will do that for you:
 
@@ -110,7 +117,7 @@ If you want to build the app, sign it, and bundle it into a zip file, just set t
 + If you don't set MAC_SIGNER you can still use package-mac to create a zip file. You'll see a harmless warning saying that the codesign failed.   
 + The "stub" Mac application has been removed. Use this real version instead.
 
-#Building a Windows Zip file
+# Building a Windows Zip file
 
 You can create a zip file that includes a Java VM and some additional windows scripts that make it more convenient to install and use VisibleTesla on a Windows machine. Just use the following command:
 
@@ -119,7 +126,7 @@ You can create a zip file that includes a Java VM and some additional windows sc
 When the resulting zip file is extracted on a Windows machine, you'll see a file called "Make_Windows_Shortcut". Double click that to put a VisibleTesla icon on your desktop that will launch the app.
 
 
-#Building a Linux Zip file
+# Building a Linux Zip file
 
 You can create a zip file that contains jsut the bare essentials for a Linux installation:
 

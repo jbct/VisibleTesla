@@ -42,7 +42,6 @@ public class VTSeries {
         this.xXform = xXform;
         this.yXform = yXform;
         series = new XYChart.Series<>();
-        series.setAppendOnly(true);
         series.setName(name);
         seriesLock = new Object();
         visibile = true;

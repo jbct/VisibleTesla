@@ -1,0 +1,16 @@
+# Auto detect text files for LF
+* text=auto
+
+# Text and code files
+*.java text
+*.xml text
+*.txt text
+*.md text
+*.css text
+*.properties text
+*.html text
+
+# Binary files
+*.png binary
+*.jpg binary
+*.jar binary
