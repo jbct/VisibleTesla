@@ -298,7 +298,7 @@ public class MainController extends BaseController {
 
     private Runnable finishAppStartup = new Runnable() {
         @Override public void run() {
-            boolean remoteStartEnabled = vtVehicle.getVehicle().remoteStartEnabled();
+            boolean remoteStartEnabled = vtVehicle.getVehicle().queryVehicle().isRemoteStartSupported;
             remoteStartMenuItem.setDisable(!remoteStartEnabled);
             
             app.watchForUserActivity(
@@ -440,8 +440,8 @@ public class MainController extends BaseController {
     private static final String[] statsColumns = new String[] {
         VTData.VoltageKey, VTData.CurrentKey,
         VTData.EstRangeKey, VTData.SOCKey,
-        VTData.ROCKey, VTData.BatteryAmpsKey,
-        VTData.SpeedKey, VTData.PowerKey,
+        VTData.ROCKey, VTData.SpeedKey, 
+        VTData.PowerKey
     };
     private static final String[] locColumns = new String[] {
         VTData.LatitudeKey, VTData.LongitudeKey,
@@ -480,6 +480,7 @@ public class MainController extends BaseController {
         Dialogs.showInformationDialog(
                 app.stage,
                 "Copyright (c) 2013, Joe Pasqua\n" +
+                "Updates by James M. Burke\n\n" +
                 "Free for personal and non-commercial use.\n" +
                 "Based on the great API detective work of many members\n" +
                 "of teslamotorsclub.com.  All Tesla imagery derives\n" +
@@ -715,13 +716,13 @@ public class MainController extends BaseController {
         Platform.runLater(new Runnable() {
             @Override public void run() {
                 String message =
-                        "VisibleTesla is unable to access your car even though" +
+                        "VisibleTesla is unable to access your car even though " +
                         "the login succeeded.\n\n";
                 if (mobileDisabled) message = message + 
                         "Your Tesla has not been configured to allow mobile " +
-                        "access. You have to enable this on your car's touch"  +
+                        "access. You have to enable this on your car's touch "  +
                         "screen using Controls / Settings / Vehicle.\n\n";
-                message = message + "VisibleTesla will still launch, but will not" +
+                message = message + "VisibleTesla will still launch, but will not " +
                         "be able to control or monitor your car until access is restored.";
                 
                 Dialogs.showErrorDialog(app.stage,
@@ -736,7 +737,7 @@ public class MainController extends BaseController {
             @Override public void run() {
                 Dialogs.showErrorDialog(app.stage,
                         "Your Tesla has not been configured to allow mobile " +
-                        "access. You have to enable this on your car's touch"  +
+                        "access. You have to enable this on your car's touch "  +
                         "screen using Controls / Settings / Vehicle." +
                         "\n\nChange that setting in your car, then relaunch VisibleTesla.",
                         "Unable to communicate with your Tesla", "Communication Problem");

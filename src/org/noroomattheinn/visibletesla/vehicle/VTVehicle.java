@@ -47,16 +47,20 @@ public class VTVehicle {
         "Black", Options.RoofType.RFBK,
         "Pano", Options.RoofType.RFPO);
     private static final Map<String,Options.Model> overrideModel = Utils.newHashMap(
+        "Model S", Options.Model.MDLS,
+        "Model X", Options.Model.MDLX,
+        "Model 3", Options.Model.MDL3);        
+    private static final Map<String,Options.ModelType> overrideModelType = Utils.newHashMap(
         // RWD Standard Models
-        "S60", Options.Model.S60,
-        "S85", Options.Model.S85,
+        "S60", Options.ModelType.S60,
+        "S85", Options.ModelType.S85,
         // RWD Performance Models
-        "P85", Options.Model.P85,
-        "P85+", Options.Model.P85Plus,
+        "P85", Options.ModelType.P85,
+        "P85+", Options.ModelType.P85Plus,
         // RWD Standard & Performance Models
-        "S70D", Options.Model.S70D,
-        "S85D", Options.Model.S85D,
-        "P85D", Options.Model.P85D);
+        "S70D", Options.ModelType.S70D,
+        "S85D", Options.ModelType.S85D,
+        "P85D", Options.ModelType.P85D);
     private static final Map<String,Options.PaintColor> overrideColor = Utils.newHashMap(
         "White", Options.PaintColor.PBCW,
         "Black", Options.PaintColor.PBSB,
@@ -118,8 +122,8 @@ public class VTVehicle {
     }
 
     public static class Overrides {
-        public final StringProperty   wheels, color, units, model, roof;
-        public final BooleanProperty  doWheels, doColor, doUnits, doModel, doRoof;
+        public final StringProperty   wheels, color, units, model, modelType, roof;
+        public final BooleanProperty  doWheels, doColor, doUnits, doModel, doModelType, doRoof;
         
         public Overrides() {
             this.wheels    = new SimpleStringProperty();
@@ -129,7 +133,9 @@ public class VTVehicle {
             this.units     = new SimpleStringProperty();
             this.doUnits   = new SimpleBooleanProperty();
             this.model     = new SimpleStringProperty();
+            this.modelType = new SimpleStringProperty();
             this.doModel   = new SimpleBooleanProperty();
+            this.doModelType = new SimpleBooleanProperty();
             this.roof      = new SimpleStringProperty();
             this.doRoof    = new SimpleBooleanProperty();
         }
@@ -139,6 +145,7 @@ public class VTVehicle {
                 StringProperty overideColorTo, BooleanProperty overideColorActive,
                 StringProperty overideUnitsTo, BooleanProperty overideUnitsActive, 
                 StringProperty overideModelTo, BooleanProperty overideModelActive, 
+                StringProperty overideModelTypeTo, BooleanProperty overideModelTypeActive,
                 StringProperty overideRoofTo, BooleanProperty overideRoofActive) {
             this.wheels = overideWheelsTo;
             this.doWheels = overideWheelsActive;
@@ -147,7 +154,9 @@ public class VTVehicle {
             this.units = overideUnitsTo;
             this.doUnits = overideUnitsActive;
             this.model = overideModelTo;
+            this.modelType = overideModelTypeTo;
             this.doModel = overideModelActive;
+            this.doModelType = overideModelTypeActive;
             this.roof = overideRoofTo;
             this.doRoof = overideRoofActive;
         }
@@ -163,6 +172,12 @@ public class VTVehicle {
         Options.Model model = overrideModel.get(overrides.model.get());
         if (overrides.doModel.get() && model != null) return model;
         return (getVehicle().getOptions().model());
+    }
+    
+    public Options.ModelType modelType() {
+         Options.ModelType modelType = overrideModelType.get(overrides.modelType.get());
+        if (overrides.doModelType.get() && modelType != null) return modelType;
+        return (getVehicle().getOptions().modelType());
     }
     
     public Options.RoofType roofType() {
@@ -204,16 +219,6 @@ public class VTVehicle {
         if (overrides.doWheels.get() && wt != null) return wt;
 
         wt = getVehicle().getOptions().wheelType();
-        VehicleState vs = vehicleState.get();
-        if (vs.wheelType != null) {
-            // Check for known override wheel types, right now that's just Aero19
-            switch (vs.wheelType) {
-                case "Aero19": wt = Options.WheelType.WTAE; break;
-                case "Base19": wt = Options.WheelType.WT19; break;
-                case "Super21Gray": wt = Options.WheelType.WTSG; break;
-                default: logger.info("Unknown WheelType: " + vs.wheelType); break;
-            }
-        }
         return wt;
     }
     

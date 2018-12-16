@@ -35,7 +35,7 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.FileChooser;
 import javafx.util.Callback;
-import jfxtras.labs.scene.control.CalendarPicker;
+import jfxtras.scene.control.CalendarPicker;
 import org.apache.commons.io.FileUtils;
 import org.noroomattheinn.tesla.ChargeState;
 import org.noroomattheinn.tesla.StreamState;

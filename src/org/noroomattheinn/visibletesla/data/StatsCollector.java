@@ -107,7 +107,6 @@ class StatsCollector implements ThreadManager.Stoppable {
         r.set(VTData.schema, VTData.EstRangeKey, cs.range);
         r.set(VTData.schema, VTData.SOCKey, cs.batteryPercent);
         r.set(VTData.schema, VTData.ROCKey, cs.chargeRate);
-        r.set(VTData.schema, VTData.BatteryAmpsKey, cs.batteryCurrent);
         r.set(VTData.schema, VTData.LatitudeKey, ss.estLat);
         r.set(VTData.schema, VTData.LongitudeKey, ss.estLng);
         r.set(VTData.schema, VTData.HeadingKey, ss.heading);
@@ -201,7 +200,6 @@ class StatsCollector implements ThreadManager.Stoppable {
         r.set(VTData.schema, VTData.EstRangeKey, state.range);
         r.set(VTData.schema, VTData.SOCKey, state.batteryPercent);
         r.set(VTData.schema, VTData.ROCKey, state.chargeRate);
-        r.set(VTData.schema, VTData.BatteryAmpsKey, state.batteryCurrent);
         ts.storeRow(r);
         
         vtData.lastStoredChargeState.set(state);

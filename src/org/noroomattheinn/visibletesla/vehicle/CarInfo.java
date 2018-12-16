@@ -84,7 +84,7 @@ class CarInfo {
                 ColorMap.get(v.paintColor()),
                 SeatMap.get(options.seatType().getColor()),
                 WheelMap.get(v.wheelType()),
-                v.vehicleState.get().hasSpoiler,
+                v.getVehicle().getOptions().hasSpoiler(),
                 v.roofType() == Options.RoofType.RFPO,
                 getModel(options));
 
@@ -110,7 +110,7 @@ class CarInfo {
     private static String ooc(boolean openState) { return openState ? "open" : "closed"; }
 
     private static String getModel(Options options) {
-        switch (options.model()) {
+        switch (options.modelType()) {
             case S60: return "s60";
             case S85: return "s85";
             case P85: return "p85";

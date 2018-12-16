@@ -9,26 +9,26 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.paint.*?>
 <?import javafx.scene.text.*?>
-<?import jfxtras.labs.scene.control.gauge.*?>
+<?import eu.hansolo.medusa.*?>
 <?scenebuilder-classpath-element ../../../../../../ThirdParty/jfxtras/jfxtras-labs-2.2-r6-20130703.085215-2.jar?>
 
 <AnchorPane id="AnchorPane" fx:id="root" disable="false" minWidth="640.0" prefHeight="400.0" prefWidth="640.0" styleClass="AnchorPane" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2" fx:controller="org.noroomattheinn.visibletesla.ChargeController">
   <children>
     <Group id="Group" layoutX="157.0" layoutY="47.0">
       <children>
-        <Battery id="BG" fx:id="batteryGauge" chargeCondition="PARTLY_CHARGED" chargeIndicator="PLUG" charging="false" chargingLevel="0.05" layoutX="0.0" layoutY="0.0" rotate="0.0" />
-        <Battery id="UBG" fx:id="usableGauge" chargeCondition="PARTLY_CHARGED" chargeIndicator="PLUG" charging="false" chargingLevel="0.5" layoutX="0.0" layoutY="0.0" rotate="0.0" visible="false" />
+        <Gauge id="BG" fx:id="batteryGauge" skinType="BATTERY" prefHeight="120" autoScale="true" barColor="GREEN" animated="true" layoutX="-20.0" layoutY="0.0" rotate="270.0" valueVisible="false" />
+        <Gauge id="UBG" fx:id="usableGauge" skinType="BATTERY" prefHeight="120" autoScale="true" barColor="GREEN" animated="true" layoutX="-20.0" layoutY="0.0" rotate="270.0" valueVisible="false" visible="false" />
         <Group id="Group" layoutX="43.0" layoutY="122.0">
           <children>
             <Label fx:id="batteryPercentLabel" layoutX="0.0" layoutY="0.0" text="67" textAlignment="RIGHT" />
             <Label layoutX="26.0" layoutY="0.0" text="\%" />
           </children>
-        </Group>
+        </Group>        
       </children>
     </Group>
-    <Lcd id="OD3" fx:id="ratedOdometer" layoutX="14.0" layoutY="37.0" lcdDecimals="1" lcdThreshold="20.0" lcdThresholdBehaviorInverted="true" lcdThresholdVisible="true" lcdUnit="Miles" lcdUnitVisible="true" maxValue="500.0" threshold="20.0" thresholdBehaviorInverted="true" thresholdVisible="true" title="Rated" unit="Miles" />
-    <Lcd id="OD3" fx:id="estOdometer" layoutX="14.0" layoutY="84.0" lcdDecimals="1" lcdThreshold="20.0" lcdThresholdBehaviorInverted="true" lcdThresholdVisible="true" lcdUnit="Miles" lcdUnitVisible="true" maxValue="500.0" threshold="20.0" thresholdBehaviorInverted="true" thresholdVisible="true" title="Estimated" unit="Miles" />
-    <Lcd id="OD3" fx:id="idealOdometer" layoutX="14.0" layoutY="131.0" lcdDecimals="1" lcdThreshold="99.0" lcdThresholdBehaviorInverted="false" lcdThresholdVisible="true" lcdUnit="Miles" lcdUnitVisible="true" maxValue="500.0" threshold="20.0" thresholdBehaviorInverted="true" thresholdVisible="true" title="Ideal" unit="Miles" />
+    <Gauge id="ODR" fx:id="ratedOdometer" skinType="LCD" layoutX="14.0" layoutY="37.0" prefHeight="45.0" prefWidth="135.0" decimals="1" unit="Miles" autoScale="true" minMeasuredValueVisible="false" maxMeasuredValueVisible="false" oldValueVisible="false" title="Rated" subTitle="Rated" />
+    <Gauge id="ODE" fx:id="estOdometer" skinType="LCD" layoutX="14.0" layoutY="84.0" prefHeight="45.0" prefWidth="135.0" decimals="1" unit="Miles" autoScale="true" minMeasuredValueVisible="false" maxMeasuredValueVisible="false" oldValueVisible="false" title="Estimated" subTitle="Estimated" />
+    <Gauge id="ODI" fx:id="idealOdometer" skinType="LCD" layoutX="14.0" layoutY="131.0" prefHeight="45.0" prefWidth="135.0" decimals="1" unit="Miles" autoScale="true" minMeasuredValueVisible="false" maxMeasuredValueVisible="false" oldValueVisible="false" title="Ideal" subTitle="Ideal" />
     <HBox id="HBox" alignment="CENTER" layoutX="321.0" layoutY="155.0" minWidth="25.0" prefWidth="44.0" spacing="5.0" />
     <Label layoutX="55.0" layoutY="9.0" text="Range">
       <font>

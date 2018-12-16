@@ -60,11 +60,6 @@
                 <Tooltip prefWidth="150.0" text="Speed" wrapText="true" />
               </tooltip>
             </CheckBox>
-            <CheckBox id="speedCheckbox" fx:id="batteryCurrentCheckbox" mnemonicParsing="false" onAction="#optionCheckboxHandler" selected="true" text="Battery Current">
-              <tooltip>
-                <Tooltip prefWidth="150.0" text="Current flowing to/from the battery" wrapText="true" />
-              </tooltip>
-            </CheckBox>
           </children>
         </VBox>
       </children>

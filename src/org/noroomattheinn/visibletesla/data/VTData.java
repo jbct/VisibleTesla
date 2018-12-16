@@ -52,7 +52,7 @@ public class VTData {
     public static final String EstRangeKey =    "C_EST";
     public static final String SOCKey =         "C_SOC";
     public static final String ROCKey =         "C_ROC";
-    public static final String BatteryAmpsKey = "C_BAM";
+    public static final String BatteryAmpsKey = "C_BAM";    // deprecated
     
     // Data that comes from the StreamState
     public static final String LatitudeKey =    "L_LAT";

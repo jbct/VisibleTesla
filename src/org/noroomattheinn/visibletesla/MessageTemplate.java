@@ -202,7 +202,7 @@ public class MessageTemplate {
                         val = String.format("%.1f", v.inProperUnits(v.chargeState.get().chargeRate));
                         break;
                     case "C_AMP":
-                        val = String.format("%.1f", v.chargeState.get().batteryCurrent);
+                        val = String.format("%d", v.chargeState.get().chargerActualCurrent);
                         break;
                     case "C_VLT":
                         val = String.valueOf(v.chargeState.get().chargerVoltage);

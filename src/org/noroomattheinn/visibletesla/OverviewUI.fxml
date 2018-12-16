@@ -196,8 +196,7 @@
     <HBox id="HBox" alignment="CENTER" layoutX="265.0" layoutY="20.0" spacing="0.0">
       <children>
         <Button fx:id="closePanoButton" mnemonicParsing="false" onAction="#panoButtonHandler" styleClass="pill-left" text="Close" />
-        <Button id="closePanoButton" fx:id="ventPanoButton" mnemonicParsing="false" onAction="#panoButtonHandler" styleClass="pill-center" text="Vent" />
-        <Button id="closePanoButton" fx:id="openPanoButton" graphicTextGap="0.0" mnemonicParsing="false" onAction="#panoButtonHandler" styleClass="pill-right" text="Open" />
+        <Button id="closePanoButton" fx:id="ventPanoButton" mnemonicParsing="false" onAction="#panoButtonHandler" styleClass="pill-right" text="Vent" />
       </children>
     </HBox>
     <ImageView fx:id="greenGlowImage" fitHeight="0.0" fitWidth="0.0" layoutX="525.0" layoutY="204.0" pickOnBounds="true" preserveRatio="true" visible="false">
@@ -230,7 +229,7 @@
         <Image url="@../TeslaResources/wheel_front_turbine@2x.png" />
       </image>
     </ImageView>
-    <Button fx:id="vinButton" layoutX="22.0" layoutY="23.0" mnemonicParsing="false" prefWidth="107.0" styleClass="noGlow" text="VIN P08714">
+    <Button fx:id="vinButton" layoutX="22.0" layoutY="23.0" mnemonicParsing="false" prefWidth="137.0" styleClass="noGlow" text="VIN P08714">
       <effect>
         <DropShadow color="#606060" offsetX="5.0" offsetY="5.0" />
       </effect>

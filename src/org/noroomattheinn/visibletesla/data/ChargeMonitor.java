@@ -78,9 +78,7 @@ class ChargeMonitor {
 
     private void updateRunningTotals(ChargeState chargeState) {
         cycleInProgress.newIE(
-                chargeState.chargerVoltage,
-                cycleInProgress.superCharger ?
-                    chargeState.batteryCurrent : chargeState.chargerActualCurrent);
+                chargeState.chargerVoltage, chargeState.chargerActualCurrent);
     }
 
     private void completeCycle(ChargeState chargeState) {

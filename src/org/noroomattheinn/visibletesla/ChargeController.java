@@ -25,9 +25,7 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.paint.Color;
-import javafx.scene.paint.Stop;
-import jfxtras.labs.scene.control.gauge.Battery;
-import jfxtras.labs.scene.control.gauge.Lcd;
+import eu.hansolo.medusa.Gauge;
 import org.noroomattheinn.tesla.ChargeState;
 import org.noroomattheinn.tesla.Result;
 import org.noroomattheinn.tesla.Vehicle;
@@ -64,13 +62,13 @@ public class ChargeController extends BaseController {
     @FXML private Hyperlink stdLink, maxLink;
     
     // Elements that display charge status
-    @FXML private Battery batteryGauge, usableGauge;
+    @FXML private Gauge batteryGauge, usableGauge;
     @FXML private Label batteryPercentLabel;
     
     // Elements that display reminaing range
-    @FXML private Lcd estOdometer;
-    @FXML private Lcd idealOdometer;
-    @FXML private Lcd ratedOdometer;
+    @FXML private Gauge estOdometer;
+    @FXML private Gauge idealOdometer;
+    @FXML private Gauge ratedOdometer;
     
     // Charging Schedule
     @FXML private Label chargeScheduledLabel, scheduledTimeLabel;
@@ -90,7 +88,6 @@ public class ChargeController extends BaseController {
     // Each Property defines a row of the table...
     private final GenericProperty pilotCurrent = new GenericProperty("Pilot Current", "0.0", "Amps");
     private final GenericProperty voltage = new GenericProperty("Voltage", "0.0", "Volts");
-    private final GenericProperty batteryCurrent = new GenericProperty("Battery Current", "0.0", "Amps");
     private final GenericProperty nRangeCharges = new GenericProperty("# Range Charges", "0.0", "Count");
     private final GenericProperty fastCharger = new GenericProperty("Supercharger", "No", "");
     private final GenericProperty chargeRate = new GenericProperty("Charge Rate", "0.0", "MPH");
@@ -102,7 +99,7 @@ public class ChargeController extends BaseController {
     
     final ObservableList<GenericProperty> data = FXCollections.observableArrayList(
             actualCurrent, voltage, chargeRate, remaining, chargingState,
-            pilotCurrent, batteryCurrent, fastCharger, chargerPower,
+            pilotCurrent, fastCharger, chargerPower,
             nRangeCharges, batteryLevel);
 
     
@@ -161,11 +158,11 @@ public class ChargeController extends BaseController {
         updatePendingChargeLabels(false);
         
         usableGauge.setVisible(false);
-        usableGauge.setLevelColors(new Stop[]{
+        /*usableGauge.setLevelColors(new Stop[]{
             new Stop(0.0, Color.web("#FFC1C1")),
             new Stop(0.55, Color.web("#FFFFC1")),
             new Stop(1.0, Color.web("#C1D6B8"))
-        });
+        });*/
         
         // Until we know that we've got the right software version, disable the slider
         chargeSlider.setDisable(true);
@@ -225,7 +222,6 @@ public class ChargeController extends BaseController {
         if (pc == -1) pilotCurrent.setValue("Unknown");
         else pilotCurrent.setValue(String.valueOf(pc));
         voltage.setValue(String.valueOf(charge.chargerVoltage));
-        batteryCurrent.setValue(String.format("%.1f", charge.batteryCurrent));
         nRangeCharges.setValue(String.valueOf(charge.maxRangeCharges));
         fastCharger.setValue(charge.fastChargerPresent ? "Yes":"No");
         chargeRate.setValue(String.format("%.1f", charge.chargeRate*conversionFactor));
@@ -286,20 +282,20 @@ public class ChargeController extends BaseController {
         int bl = charge.batteryPercent;
         int ubl = charge.usableBatteryLevel;
         
-        batteryGauge.setChargingLevel(bl/100.0);
-        usableGauge.setChargingLevel(ubl/100.0);
+        batteryGauge.setValue(bl);
+        usableGauge.setValue(ubl);
         
-        switch (charge.chargingState) {
+        /*switch (charge.chargingState) {
             case Complete:
             case Charging:
-                batteryGauge.setCharging(true);
-                usableGauge.setCharging(true);
+-               batteryGauge.setCharging(true);
+-               usableGauge.setCharging(true);
                 break;
             default:
-                batteryGauge.setCharging(false);
-                usableGauge.setCharging(false);
+-               batteryGauge.setCharging(false);
+-               usableGauge.setCharging(false);
                 break;
-        }
+        }*/
 
         if (ubl == 0) ubl = bl;
         if (bl - ubl >= 2) {

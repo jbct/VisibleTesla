@@ -114,7 +114,7 @@ public class OverviewController extends BaseController {
     // Controls
     //
     @FXML private Button lockButton;
-    @FXML private Button closePanoButton, ventPanoButton, openPanoButton;
+    @FXML private Button closePanoButton, ventPanoButton;
     
 /*------------------------------------------------------------------------------
  *
@@ -135,8 +135,7 @@ public class OverviewController extends BaseController {
     @FXML void panoButtonHandler(ActionEvent event) {
         Button source = (Button)event.getSource();
         final PanoCommand cmd = 
-            source == ventPanoButton ? PanoCommand.vent :
-                ((source == openPanoButton) ? PanoCommand.open : PanoCommand.close);
+            source == ventPanoButton ? PanoCommand.vent : PanoCommand.close;
         issueCommand(new Callable<Result>() {
             @Override public Result call() {
                 Result r = vtVehicle.getVehicle().setPano(cmd);
@@ -150,9 +149,9 @@ public class OverviewController extends BaseController {
         VehicleState car = vtVehicle.vehicleState.get();
         String info = vtVehicle.getVehicle().toString() +
                 "\nFirmware Version: " + car.version +
-                "\nRemote Start Enabled: " + vtVehicle.getVehicle().remoteStartEnabled() +
-                "\nCalendar Enabled: " + vtVehicle.getVehicle().calendarEnabled() +
-                "\nNotifications Enabled: " + vtVehicle.getVehicle().notificationsEnabled() +
+                "\nRemote Start Enabled: " + car.isRemoteStartSupported +
+                "\nCalendar Enabled: " + car.isCalendarSupported +
+                "\nNotifications Enabled: " + car.areNotificationsSupported +
                 "\n--------------------------------------------" +
                 "\nLow level information: " + vtVehicle.getVehicle().getUnderlyingValues() +
                 "\nVehicle UUID: " + vtVehicle.getVehicle().getUUID() +
@@ -320,7 +319,7 @@ public class OverviewController extends BaseController {
         setOptionState(car.locked, lockedImg, unlockedImg);
         
         spoilerOpenImg.setVisible(false); spoilerClosedImg.setVisible(false);
-        if (vtVehicle.vehicleState.get().hasSpoiler) {
+        if (vtVehicle.getVehicle().getOptions().hasSpoiler()) {
             setOptionState(rtOpen, spoilerOpenImg, spoilerClosedImg);
         }        
     }
@@ -339,7 +338,6 @@ public class OverviewController extends BaseController {
         // Only show the pano controls and percent if we have a pano roof
         closePanoButton.setVisible(hasPano);
         ventPanoButton.setVisible(hasPano);
-        openPanoButton.setVisible(hasPano);
         panoPercent.setVisible(hasPano);
         
         if (hasPano)
@@ -397,7 +395,7 @@ public class OverviewController extends BaseController {
         s70dImg.setVisible(false);
         s85dImg.setVisible(false);
         p85dImg.setVisible(false);
-        switch (vtVehicle.model()) {
+        switch (vtVehicle.modelType()) {
             // RWD Standard Models
             case S60: s60Img.setVisible(true); break;
             case S85: s85Img.setVisible(true); break;

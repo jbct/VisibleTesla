@@ -213,7 +213,7 @@ public class HVACController extends BaseController {
     
     private void reflectDefrosterState() {
         HVACState hvac = vtVehicle.hvacState.get();
-        setOptionState(hvac.isFrontDefrosterOn != 0, frontDefOnImg, frontDefOffImg);
+        setOptionState(hvac.isFrontDefrosterOn, frontDefOnImg, frontDefOffImg);
         setOptionState(hvac.isRearDefrosterOn, rearDefOnImg, rearDefOffImg);
     }
     

@@ -74,7 +74,6 @@ public class GraphController extends BaseController {
     @FXML private CheckBox socCheckbox;
     @FXML private CheckBox rocCheckbox;
     @FXML private CheckBox powerCheckbox;
-    @FXML private CheckBox batteryCurrentCheckbox;
     @FXML private CheckBox speedCheckbox;
     @FXML private AnchorPane itemListContent;
     @FXML private Button nowButton;
@@ -148,8 +147,6 @@ public class GraphController extends BaseController {
                 new VTSeries(VTData.PowerKey, VTSeries.millisToSeconds, VTSeries.idTransform)));
         cbToSeries.put(speedCheckbox, lineChart.register(
                 new VTSeries(VTData.SpeedKey, VTSeries.millisToSeconds, distTransform)));
-        cbToSeries.put(batteryCurrentCheckbox, lineChart.register(
-                new VTSeries(VTData.BatteryAmpsKey, VTSeries.millisToSeconds, VTSeries.idTransform)));
         
         // Make the checkbox colors match the series colors
         int seriesNumber = 0;
@@ -379,7 +376,6 @@ public class GraphController extends BaseController {
             addElement(typeToSeries.get(VTData.EstRangeKey), cs.timestamp, cs.range);
             addElement(typeToSeries.get(VTData.SOCKey), cs.timestamp, cs.batteryPercent);
             addElement(typeToSeries.get(VTData.ROCKey), cs.timestamp, cs.chargeRate);
-            addElement(typeToSeries.get(VTData.BatteryAmpsKey), cs.timestamp, cs.batteryCurrent);
         }
     };
     

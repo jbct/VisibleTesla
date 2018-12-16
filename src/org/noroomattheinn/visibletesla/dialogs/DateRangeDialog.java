@@ -13,7 +13,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.stage.Stage;
 import javafx.util.Callback;
-import jfxtras.labs.scene.control.CalendarPicker;
+import jfxtras.scene.control.CalendarPicker;
 
 
 public class DateRangeDialog extends VTDialog.Controller {
