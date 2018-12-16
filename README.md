@@ -20,6 +20,7 @@ Use this application at your own risk. The author does not guarantee its proper 
 Joe Pasqua (https://github.com/jpasqua): Author  
 Alex Karahalios (https://github.com/araxara): Mac App Bundling  
 Sune Jakobsson (https://github.com/sunejak): Testing and Several Bug Fixes
+
 James Burke (https://github.com/jbct): Modern updates
 
 # Preparing your build environment

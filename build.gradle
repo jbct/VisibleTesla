@@ -1,0 +1,50 @@
+apply plugin: 'java'
+apply plugin: 'application'
+
+mainClassName = "org.noroomattheinn.visibletesla.VisibleTesla"
+
+def javaFxHome = "${System.properties['java.home']}";
+
+repositories {
+  jcenter()
+}
+
+sourceSets {
+  main {
+    java {
+	  srcDir 'src'
+	}
+	resources {
+	  srcDir 'src'
+	}
+  }
+}
+
+dependencies {
+  compile files("$javaFxHome/lib/ext/jfxrt.jar")
+  compile 'commons-io:commons-io:2.6'
+  compile 'org.apache.commons:commons-lang3:3.8.1'
+  compile files('../../ThirdParty/javafx-dialogs/javafx-dialogs-0.0.3JP.jar')
+  compile 'net.sourceforge.jexcelapi:jxl:2.6.12'
+  compile 'com.google.guava:guava:27.0.1-jre'
+  compile 'commons-codec:commons-codec:1.11'
+  compile 'it.sauronsoftware.cron4j:cron4j:2.2.5'
+  compile 'commons-logging:commons-logging:1.2'
+  compile 'us.monoid.web:resty:0.3.2'
+  compile 'eu.hansolo:Medusa:8.0'
+  compile 'com.google.code.geocoder-java:geocoder-java:0.16'
+  compile 'org.jfxtras:jfxtras-common:8.0-r6'
+  compile 'org.jfxtras:jfxtras-controls:8.0-r6'
+  compile 'org.jfxtras:jfxtras-labs:8.0-r6'
+  compile files('../TeslaClient/build/libs/TeslaClient.jar')
+}
+
+jar {
+  doFirst {
+    manifest {
+      attributes(
+        'Main-Class': 'org.noroomattheinn.visibletesla.VisibleTesla'
+      )
+    }
+  }
+}
